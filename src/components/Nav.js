@@ -21,7 +21,7 @@ export default ({cart}) => (
 
     <style jsx>{`
       .nav-wrapper {
-        width: 100%;
+        /* width: 100%; */
         background-color: gray;
         padding: 1em 3em;
         display: flex;

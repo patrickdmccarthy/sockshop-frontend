@@ -3,6 +3,7 @@ import {
   BrowserRouter as Router,
   Route
 } from 'react-router-dom'
+import createBrowserHistory from 'history/createBrowserHistory'
 import CartProvider from "./components/CartProvider";
 import Nav from "./components/Nav";
 import Home from "./pages/Home";
@@ -11,8 +12,15 @@ import Cart from "./pages/Cart";
 import Checkout from "./pages/Checkout";
 import ThankYou from "./pages/ThankYou";
 
+const history = createBrowserHistory();
+
+history.listen(function (location) {
+  window.ga('set', 'page', location.pathname + location.search);
+  window.ga('send', 'pageview', location.pathname + location.search);
+});
+
 export default () => (
-  <Router>
+  <Router history={history}>
     <CartProvider>
       <Routes />
     </CartProvider>
@@ -27,12 +35,5 @@ const Routes = (props) => (
     <Route path="/cart" render={() => <Cart {...props}/> }/>
     <Route path="/checkout" component={Checkout}/>
     <Route path="/thankyou" component={ThankYou}/>
-  </div>
-)
-
-const a = () => (
-  <div>
-    <h1>test</h1>
-    <Route path="/cart" component={Cart}/>
   </div>
 )

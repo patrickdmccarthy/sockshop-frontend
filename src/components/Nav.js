@@ -4,9 +4,7 @@ import MdShoppingCart from 'react-icons/lib/md/shopping-cart'
 
 import { totalItems } from '../utils/helpers'
 
-export default ({cart}) => {
-  console.log(cart)
-  return (
+export default ({cart}) => (
   <div className={'nav-wrapper'}>
     <Link to={`/`}>
       <a>
@@ -38,4 +36,4 @@ export default ({cart}) => {
       }
     `}</style>
   </div>
-)}
+)

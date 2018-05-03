@@ -1,6 +1,20 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-unfetch'
+import styled from 'styled-components';
+
+const Container = styled.div`
+  padding: 5%;
+  display: flex;
+  flex-wrap: wrap;
+`;
+
+const Product = styled.div`
+  width: 33%;
+  text-align: center;
+  margin-bottom: 2em;
+  cursor: pointer;
+`
 
 const {REACT_APP_PRODUCT_SERVICE, REACT_APP_CART_SERVICE} = process.env
 
@@ -55,9 +69,9 @@ class Home extends Component {
 
     return (
       <div>
-        <div className={"product-container"}>
+        <Container>
           {products && products.map((product) => (
-            <div key={product.id} className={"product"}>
+            <Product key={product.id}>
               <Link to={`/product/${product.id}`}>
                 <div>
                   <div>
@@ -66,9 +80,9 @@ class Home extends Component {
                   <span>{product.name}</span>
                 </div>
               </Link>
-            </div>
+            </Product>
           ))}
-        </div>
+        </Container>
       </div>
     )
   }

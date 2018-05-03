@@ -16,7 +16,7 @@ export const checkout = async (form, callback) => {
       headers: {
         'content-type': 'application/json'
       },
-      method: 'POST',
+      method: 'PUT',
       mode: 'cors',
     })
     const data = await res.json()

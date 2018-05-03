@@ -30,7 +30,7 @@ export default () => (
 const Routes = (props) => (
   <div>
     <Nav {...props}/>
-    <Route exact path="/" component={Home}/>
+    <Route exact path="/" render={() => <Home {...props} />}/>
     <Route path="/product/:id" render={({match}) => <Product match={match} {...props} />}/>
     <Route path="/cart" render={() => <Cart {...props}/> }/>
     <Route path="/checkout" component={Checkout}/>

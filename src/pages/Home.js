@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import fetch from 'isomorphic-unfetch'
 import styled from 'styled-components';
 
+import { addToCart } from '../services/product'
+
 const Container = styled.div`
   padding: 5%;
   display: flex;
@@ -65,21 +67,25 @@ class Home extends Component {
   }
 
   render() {
-    const { products } = this.state;
+    const { addItem } = this.props
+    const { products } = this.state
 
     return (
       <div>
         <Container>
           {products && products.map((product) => (
             <Product key={product.id}>
-              <Link to={`/product/${product.id}`}>
                 <div>
                   <div>
-                    <img src={product.img.small} />
+                    <Link to={`/product/${product.id}`}>
+                      <img src={product.img.small} />
+                    </Link>
                   </div>
-                  <span>{product.name}</span>
+                  <Link to={`/product/${product.id}`}>
+                    <span>{product.name}</span>
+                  </Link>
+                  <button onClick={() => addToCart(product, addItem)}>Add to Cart</button>
                 </div>
-              </Link>
             </Product>
           ))}
         </Container>

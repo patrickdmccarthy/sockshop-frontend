@@ -1,5 +1,6 @@
 import React, { Component, cloneElement } from 'react'
 import fetch from 'isomorphic-unfetch'
+import { withRouter } from 'react-router-dom'
 
 const {REACT_APP_CART_SERVICE} = process.env
 
@@ -58,6 +59,19 @@ class CartProvider extends Component {
     })
   }
 
+  addItem = (item, callback) => {
+    this.setState({
+      cart: {
+        ...this.state.cart,
+        CartItems: [...this.state.cart.CartItems, item]
+      }
+    }, () => { if(callback) { callback() }})
+  }
+
+  addAndCheckout = (item) => {
+    this.addItem(item, () => this.props.history.push('/checkout'))
+  }
+
   render() {
     const childrenWithProps = React.Children.map(this.props.children, child =>
       cloneElement(child, {
@@ -65,6 +79,7 @@ class CartProvider extends Component {
         updateItemState: this.updateItemState,
         removeItem: this.removeItem,
         addItem: this.addItem,
+        addAndCheckout: this.addAndCheckout,
         cart: this.state.cart
       }))
 
@@ -76,4 +91,4 @@ class CartProvider extends Component {
   }
 }
 
-export default CartProvider
+export default withRouter(CartProvider);

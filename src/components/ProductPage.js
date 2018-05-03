@@ -23,7 +23,7 @@ const Image = styled.img`
   max-width: 100%;
 `;
 
-export default ({addItem, cart, product}) => (
+export default ({addItem, addAndCheckout, cart, product}) => (
     <div>
       { !isEmpty(product) &&
         <Container>
@@ -39,7 +39,10 @@ export default ({addItem, cart, product}) => (
               ?
                 <button disabled={true}>Already Added</button>
               :
-                <button onClick={() => addToCart(product, addItem)}>Add to Cart</button>
+                <div>
+                  <button onClick={() => addToCart(product, addItem)}>Add to Cart</button>
+                  <button onClick={() => addToCart(product, addAndCheckout)}>Quick Buy</button>
+                </div>
                 }
               </div>
             </DetailsContainer>

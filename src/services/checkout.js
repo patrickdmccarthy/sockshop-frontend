@@ -25,7 +25,6 @@ export const checkout = async (form, callback) => {
     } else {
       callback()
     }
-    console.log(data)
   } catch (error) {
     alert(error)
   }

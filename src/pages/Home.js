@@ -16,7 +16,7 @@ const Product = styled.div`
   cursor: pointer;
 `
 
-const {REACT_APP_PRODUCT_SERVICE, REACT_APP_CART_SERVICE} = process.env
+const {REACT_APP_PRODUCT_SERVICE_PORT, REACT_APP_CART_SERVICE_PORT} = process.env
 
 const setUserId = () => {
   const randomId = Math.floor(Math.random() * 10E8)
@@ -24,7 +24,7 @@ const setUserId = () => {
 }
 
 const setCartId = async () => {
-  const res = await fetch(`${REACT_APP_CART_SERVICE}/carts`, {
+  const res = await fetch(`${window.location.protocol + "//" + window.location.hostname + REACT_APP_CART_SERVICE_PORT}/carts`, {
     body: JSON.stringify({ userId: localStorage.getItem("userId") }),
     headers: {
       'content-type': 'application/json'
@@ -46,7 +46,7 @@ class Home extends Component {
 
   componentDidMount = async function() {
     try {
-      const res = await fetch(`${REACT_APP_PRODUCT_SERVICE}/products`)
+      const res = await fetch(`${window.location.protocol + "//" + window.location.hostname + REACT_APP_PRODUCT_SERVICE_PORT}/products`)
       const data = await res.json()
       const { products } = data
       this.setState({ products })
@@ -75,7 +75,7 @@ class Home extends Component {
               <Link to={`/product/${product.id}`}>
                 <div>
                   <div>
-                    <img src={product.img.small} />
+                    <img src={product.img.small} alt={product.name} />
                   </div>
                   <span>{product.name}</span>
                 </div>

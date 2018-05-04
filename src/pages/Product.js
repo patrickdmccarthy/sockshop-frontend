@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import fetch from 'isomorphic-unfetch'
 import ProductPage from '../components/ProductPage'
 
-const {REACT_APP_PRODUCT_SERVICE} = process.env
+const {REACT_APP_PRODUCT_SERVICE_PORT} = process.env
 
 class Product extends Component {
   constructor () {
@@ -15,7 +15,7 @@ class Product extends Component {
   componentDidMount = async () => {
     try {
       const { id } = this.props.match.params
-      const res = await fetch(`${REACT_APP_PRODUCT_SERVICE}/product/${id}`)
+      const res = await fetch(`${window.location.protocol + "//" + window.location.hostname + REACT_APP_PRODUCT_SERVICE_PORT}/product/${id}`)
       const product = await res.json()
 
       this.setState({

@@ -1,7 +1,7 @@
 import React, { Component, cloneElement } from 'react'
 import fetch from 'isomorphic-unfetch'
 
-const {REACT_APP_CART_SERVICE} = process.env
+const {REACT_APP_CART_SERVICE_PORT} = process.env
 
 class CartProvider extends Component {
   constructor () {
@@ -15,7 +15,7 @@ class CartProvider extends Component {
     try {
       const cartId = localStorage.getItem("cartId")
 
-      const res = await fetch(`${REACT_APP_CART_SERVICE}/carts/${cartId}`)
+      const res = await fetch(`${window.location.protocol + "//" + window.location.hostname + REACT_APP_CART_SERVICE_PORT}/carts/${cartId}`)
       const data = await res.json()
 
       this.setState({
